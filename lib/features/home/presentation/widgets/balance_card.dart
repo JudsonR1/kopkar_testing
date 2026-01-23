@@ -18,12 +18,15 @@ class BalanceCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF300060), Color(0xFF500090)], // Dark purple gradient
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+         image: const DecorationImage(
+    image: AssetImage('assets/home_page/balance_card_bg.png'),
+    fit: BoxFit.cover, 
+  ),
         borderRadius: BorderRadius.circular(20),
+         border: Border.all(
+    color: Colors.white, // white outline
+    width: 1.5, // thickness
+  ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),

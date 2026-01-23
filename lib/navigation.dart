@@ -85,17 +85,14 @@ Widget _navItem({
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // 1. THE PILL INDICATOR
         Container(
-          width: 64, // Standard M3 width
-          height: 32, // Standard M3 height
+          width: 64, 
+          height: 32, 
           decoration: BoxDecoration(
-            // Blue.shade50 when active, transparent when inactive
             color: isActive ? Colors.blue.shade50 : Colors.transparent,
-            borderRadius: BorderRadius.circular(16), // Makes it pill-shaped
+            borderRadius: BorderRadius.circular(16),
           ),
           child: Center(
-            // 2. ICON THEME (NAVY BLUE vs GREY)
             child: IconTheme(
               data: IconThemeData(
                 color: isActive ? const Color(0xFF000080) : Colors.grey,
@@ -106,13 +103,12 @@ Widget _navItem({
           ),
         ),
         const SizedBox(height: 4),
-        // 3. TEXT STYLE (W500)
         Text(
           label,
           style: const TextStyle(
             fontSize: 12,
-            fontWeight: FontWeight.w500, // Specified in your comments
-            color: Colors.black, // Standard M3 labels stay black
+            fontWeight: FontWeight.w500, 
+            color: Colors.black,
           ),
         ),
       ],

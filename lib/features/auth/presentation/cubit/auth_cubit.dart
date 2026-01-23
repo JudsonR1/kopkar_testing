@@ -9,7 +9,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> login(String identifier, String password) async {
     emit(AuthLoading());
     try {
-      await Future.delayed(const Duration(seconds: 1)); // Mock network call
+      await Future.delayed(const Duration(seconds: 1));
       if (identifier.isNotEmpty && password.isNotEmpty) {
         emit(const AuthSuccess("Login Successful!"));
       } else {
@@ -29,7 +29,7 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthLoading());
     try {
-      await Future.delayed(const Duration(seconds: 2)); // Mock network call
+      await Future.delayed(const Duration(seconds: 1));
       if (password != confirmPassword) {
         emit(const AuthFailure("Passwords do not match."));
         return;

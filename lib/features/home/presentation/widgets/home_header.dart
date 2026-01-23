@@ -19,8 +19,10 @@ class HomeHeader extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Color(0xFF4A00E0), // Purple-ish blue
-            Color(0xFF000080), // Dark Blue
+            // Color(0xFF4A00E0), // Purple-ish blue
+            // Color(0xFF000080), // Dark Blue
+            Color.fromARGB(0, 255, 255, 255),
+            Color.fromARGB(0, 255, 255, 255)
           ],
         ),
         borderRadius: BorderRadius.only(
@@ -53,7 +55,7 @@ class HomeHeader extends StatelessWidget {
                 Text(
                   memberId,
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.8),
+                    color: const Color.fromARGB(200, 255, 255, 255),
                     fontSize: 14,
                   ),
                 ),
@@ -61,11 +63,10 @@ class HomeHeader extends StatelessWidget {
             ),
           ),
           // Notification Icons
-          Icon(Icons.notifications_none, color: Colors.white.withOpacity(0.9)),
           const SizedBox(width: 10),
-          Icon(Icons.signal_cellular_alt, color: Colors.white.withOpacity(0.9)),
         ],
       ),
+    
     );
   }
 }

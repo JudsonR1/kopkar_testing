@@ -34,31 +34,45 @@ class HomeView extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  Stack(
-                    alignment: Alignment.bottomCenter,
-                    clipBehavior: Clip.none,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 60),
-                        child: HomeHeader(
-                          userName: state.data.userName,
-                          memberId: state.data.memberId,
+
+                  Container(
+                     padding: const EdgeInsets.only(bottom: 24),
+                      decoration: const BoxDecoration(
+     image: DecorationImage(
+      image: AssetImage('assets/home_page/header_bg.png'),
+      fit: BoxFit.cover,
+    ),
+    borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(24), 
+      bottomRight: Radius.circular(24),
+    ),
+  ),
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      clipBehavior: Clip.none,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 80),
+                          child: HomeHeader(
+                            userName: state.data.userName,
+                            memberId: state.data.memberId,
+                          ),
                         ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: BalanceCard(
-                          totalBalance: state.data.totalBalance,
-                          mandatory: state.data.mandatorySavings,
-                          voluntary: state.data.voluntarySavings,
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: BalanceCard(
+                            totalBalance: state.data.totalBalance,
+                            mandatory: state.data.mandatorySavings,
+                            voluntary: state.data.voluntarySavings,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                    SizedBox(
-                    height: 50,
+                    height: 20,
                   ),
                   SizedBox(
   height: 50,
@@ -71,6 +85,10 @@ class HomeView extends StatelessWidget {
     ),
   ),)
 ),
+ SizedBox(
+                    height: 5,
+                  ),
+
                   TransactionList(
                     transactions: state.data.transactions,
                   ),

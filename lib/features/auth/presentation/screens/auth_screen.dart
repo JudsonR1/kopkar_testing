@@ -72,7 +72,6 @@ class _AuthViewState extends State<AuthView> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Replace with your actual logo asset
                     Container(
                       height: 130,
                       width: 130,
