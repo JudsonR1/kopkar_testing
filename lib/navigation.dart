@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kopkar_testing/test_page_2.dart';
+import 'package:kopkar_testing/features/portfolio/presentation/screens/portfolio_screen.dart';
 import 'package:kopkar_testing/test_page_3.dart';
 import 'package:kopkar_testing/test_page_4.dart';
 
@@ -18,7 +18,7 @@ class _NavigationState extends State<Navigation> {
 
   final List _pages = [
     HomeScreen(),
-    SecondPage(),
+    PortfolioScreen(),
     ThirdPage(),
     FourthPage(),
   ];
@@ -124,7 +124,7 @@ Widget _navItem({
     index: _selectedIndex,
     children: [
        const HomeScreen(),      
-       const SecondPage(),
+       const PortfolioScreen(),
        const ThirdPage(),
        const FourthPage()
     ],
