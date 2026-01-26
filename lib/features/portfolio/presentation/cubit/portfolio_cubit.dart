@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../home/domain/entities/transaction_entities.dart'; 
+
+import '../../../home/domain/entities/transaction_entities.dart';
 import 'portfolio_state.dart';
 
 

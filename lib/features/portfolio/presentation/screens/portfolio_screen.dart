@@ -70,6 +70,7 @@ class PortfolioView extends StatelessWidget {
                           title: "Simpanan Wajib",
                           amount: data.mandatorySavings,
                           icon: Icons.receipt_long,
+                          iconBackgroundImage: const AssetImage('assets/portfolio_page/simpanan_wajib_bg.png'),
                           onDetailTap: () {
                              // Handle Navigation Here
                              print("Navigate to Simpanan Wajib Detail");
@@ -84,7 +85,7 @@ class PortfolioView extends StatelessWidget {
                           icon: Icons.account_balance_wallet,
                           backgroundColor: const Color(0xFF000080), // Dark Blue
                           textColor: Colors.white,
-                          iconBackgroundColor: Colors.white.withOpacity(0.2),
+                          iconBackgroundColor: const Color.fromARGB(0, 255, 255, 255),
                           onDetailTap: () {
                              print("Navigate to Simpanan Sukarela Detail");
                           },

@@ -8,6 +8,8 @@ class PortfolioCard extends StatelessWidget {
   final Color textColor;
   final Color iconBackgroundColor;
   final VoidCallback onDetailTap; // Clickable action
+  final ImageProvider? iconBackgroundImage;
+  final Color iconColor;
 
   const PortfolioCard({
     super.key,
@@ -18,6 +20,8 @@ class PortfolioCard extends StatelessWidget {
     this.backgroundColor = Colors.white,
     this.textColor = Colors.black,
     this.iconBackgroundColor = const Color(0xFFE3F2FD), // Light Blue default
+    this.iconBackgroundImage,
+    this.iconColor = Colors.white
   });
 
   @override
@@ -38,7 +42,7 @@ class PortfolioCard extends StatelessWidget {
         ],
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Text Section
           Expanded(
@@ -87,10 +91,16 @@ class PortfolioCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: iconBackgroundColor,
               borderRadius: BorderRadius.circular(12),
+              color: iconBackgroundImage == null ? iconBackgroundColor : null,
+                image: iconBackgroundImage != null
+        ? DecorationImage(
+            image: iconBackgroundImage!,
+            fit: BoxFit.cover,
+          )
+        : null,
             ),
-            child: Icon(icon, color: backgroundColor == Colors.white ? const Color(0xFF000080) : Colors.white),
+            child: Icon(icon, size: 35, color: iconColor),
           ),
         ],
       ),

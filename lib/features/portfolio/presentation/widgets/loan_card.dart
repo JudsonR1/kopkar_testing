@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoanCard extends StatelessWidget {
   final double amount;
@@ -20,7 +21,7 @@ class LoanCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF8B0000), // Dark Red
+        color: const Color.fromRGBO(148, 0, 0, 1), // Dark Red
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -60,25 +61,64 @@ class LoanCard extends StatelessWidget {
             ),
           ),
           // Circular Progress
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              SizedBox(
-                width: 80,
-                height: 80,
-                child: CircularProgressIndicator(
-                  value: progress,
-                  strokeWidth: 8,
-                  backgroundColor: Colors.white.withOpacity(0.2),
-                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-                ),
-              ),
-              Text(
-                "${(progress * 100).toInt()}%",
-                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ],
+          SizedBox(
+  width: 90,
+  height: 110,
+  child: Stack(
+    clipBehavior: Clip.none,
+    alignment:Alignment(0.6, -1), 
+    children: [
+      // Icon
+      Positioned(
+        top: -20,
+        child: Container(
+          padding: const EdgeInsets.all(6),
+          decoration: const BoxDecoration(
+            color: Color.fromRGBO(148, 0, 0, 1),
+            shape: BoxShape.circle,
           ),
+          child: SvgPicture.asset(
+               'assets/icons/loan_icon.svg',
+              width: 36,
+              height: 36,
+              ),
+        ),
+      ),
+
+      // Circle + centered text
+      Positioned(
+        bottom: -20,
+        
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            SizedBox(
+              width: 80,
+              height: 80,
+              child: CircularProgressIndicator(
+                value: progress,
+                strokeWidth: 8,
+                backgroundColor: Colors.white.withOpacity(0.2),
+                valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+              ),
+            ),
+            Text(
+              "${(progress * 100).toInt()}%",
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                height: 1, // important for vertical centering
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
+  ),
+),
+
+
         ],
       ),
     );

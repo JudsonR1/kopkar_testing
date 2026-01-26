@@ -62,6 +62,7 @@ class _AuthViewState extends State<AuthView> {
         }
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: const Color(0xFF000080), 
         body: Column(
           children: [
