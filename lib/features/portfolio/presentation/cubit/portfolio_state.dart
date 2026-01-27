@@ -1,6 +1,6 @@
 
 import 'package:equatable/equatable.dart';
-import '../../../home/domain/entities/transaction_entities.dart'; 
+import '../../../home/domain/entities/account_summary.dart'; 
 
 abstract class PortfolioState extends Equatable {
   const PortfolioState();
@@ -11,7 +11,7 @@ abstract class PortfolioState extends Equatable {
 class PortfolioLoading extends PortfolioState {}
 
 class PortfolioLoaded extends PortfolioState {
-  final TransactionEntities data;
+  final AccountSummary data;
   const PortfolioLoaded(this.data);
   @override
   List<Object> get props => [data];

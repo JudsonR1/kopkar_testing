@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kopkar_testing/features/auth/domain/repositories/auth_repository.dart';
 import 'package:kopkar_testing/features/auth/presentation/cubit/auth_state.dart';
 import 'package:kopkar_testing/navigation.dart';
 
@@ -14,7 +15,10 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(),
+       lazy: true,
+      create: (context) =>AuthCubit(
+        context.read<AuthRepository>(), 
+      ),
       child: const AuthView(),
     );
   }
@@ -32,6 +36,16 @@ class _AuthViewState extends State<AuthView> {
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
   final PageController _pageController = PageController();
 
+
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    ));
+  }
   @override
   void dispose() {
     _selectedIndex.dispose();
@@ -41,10 +55,6 @@ class _AuthViewState extends State<AuthView> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-    ));
 
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {

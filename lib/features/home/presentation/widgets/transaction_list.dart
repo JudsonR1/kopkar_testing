@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
-import '../../data/model/transaction_model.dart';
+import '../../domain/entities/transaction_entity.dart';
 
 
 class TransactionList extends StatelessWidget {
-  final List<TransactionModel> transactions;
+  final List<TransactionEntity> transactions;
 
   const TransactionList({super.key, required this.transactions});
 
@@ -104,7 +104,7 @@ Widget _buildSummaryRow(String label, double amount) {
       ),
     );
   }
-  Widget _buildItem(TransactionModel tx) {
+  Widget _buildItem(TransactionEntity tx) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
@@ -153,7 +153,7 @@ Widget _buildSummaryRow(String label, double amount) {
     );
   }
 
-List<TransactionGroup> _groupTransactions(List<TransactionModel> rawList) {
+List<TransactionGroup> _groupTransactions(List<TransactionEntity> rawList) {
 
     final Map<String, TransactionGroup> groups = {};
 
@@ -215,7 +215,7 @@ List<TransactionGroup> _groupTransactions(List<TransactionModel> rawList) {
 }
 class TransactionGroup {
   final String monthYear;
-  final List<TransactionModel> transactions;
+  final List<TransactionEntity> transactions;
   double totalIncome;
   double totalExpense;
 

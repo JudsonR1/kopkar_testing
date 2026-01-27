@@ -1,20 +1,22 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kopkar_testing/features/auth/presentation/cubit/auth_state.dart';
-
+import 'package:kopkar_testing/features/auth/domain/repositories/auth_repository.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthInitial());
+  final AuthRepository _authRepository;
+ AuthCubit(this._authRepository) : super(AuthInitial());
 
   Future<void> login(String identifier, String password) async {
     emit(AuthLoading());
     try {
-      await Future.delayed(const Duration(seconds: 1));
-      if (identifier.isNotEmpty && password.isNotEmpty) {
-        emit(const AuthSuccess("Login Successful!"));
-      } else {
+   if (identifier.isEmpty || password.isEmpty) {
         emit(const AuthFailure("Please fill in all fields."));
+        return;
       }
+  final token = await _authRepository.login(identifier, password);
+      emit(const AuthSuccess("Login Successful!"));
+  
     } catch (e) {
       emit(AuthFailure(e.toString()));
     }

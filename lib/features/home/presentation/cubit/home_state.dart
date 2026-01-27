@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:kopkar_testing/features/home/domain/entities/transaction_entities.dart';
+import 'package:kopkar_testing/features/home/domain/entities/account_summary.dart';
 
 abstract class HomeState extends Equatable {
   const HomeState();
@@ -11,7 +11,7 @@ abstract class HomeState extends Equatable {
 class HomeLoading extends HomeState {}
 
 class HomeLoaded extends HomeState {
-final TransactionEntities data;
+final AccountSummary data;
 
  const HomeLoaded(this.data);
   @override

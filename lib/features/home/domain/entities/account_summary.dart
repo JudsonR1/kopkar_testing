@@ -1,6 +1,6 @@
-import 'package:kopkar_testing/features/home/data/model/transaction_model.dart';
+import 'package:kopkar_testing/features/home/domain/entities/transaction_entity.dart';
 
-class TransactionEntities {
+class AccountSummary {
   final String userName;
   final String memberId;
   final double totalBalance;
@@ -9,9 +9,9 @@ class TransactionEntities {
   final double loanBalance;      
   final double totalLoan;        
   final String loanDueDate;
-  final List<TransactionModel> transactions;
+  final List<TransactionEntity> transactions;
 
-  TransactionEntities({
+  AccountSummary({
     required this.userName,
     required this.memberId,
     required this.totalBalance,

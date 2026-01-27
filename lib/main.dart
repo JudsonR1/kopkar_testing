@@ -1,27 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kopkar_testing/features/auth/presentation/screens/auth_screen.dart';
 
-void main() {
+import 'features/auth/data/repositories_impl/auth_repository_impl.dart';
+import 'features/auth/domain/repositories/auth_repository.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-    home: AuthScreen(), 
-     initialRoute: '/',
-    routes:{
-
-    }
-  );
+     return  MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<AuthRepository>(
+          lazy: true,
+          create: (_) => AuthRepositoryImpl(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+      home: AuthScreen(), 
+       initialRoute: '/',
+      routes:{
+      
+      }
+        ),
+    );
   }
 }

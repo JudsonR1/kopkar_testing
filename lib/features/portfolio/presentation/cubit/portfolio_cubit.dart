@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../home/domain/entities/transaction_entities.dart';
+import '../../../home/domain/entities/account_summary.dart';
 import 'portfolio_state.dart';
 
 
@@ -12,7 +12,7 @@ class PortfolioCubit extends Cubit<PortfolioState> {
     try {
       await Future.delayed(const Duration(seconds: 1)); 
 
-      final data = TransactionEntities(
+      final data = AccountSummary(
         userName: "Stella Budiman",
         memberId: "50739",
         totalBalance: 12500000,
