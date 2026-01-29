@@ -5,6 +5,8 @@ import 'package:kopkar_testing/features/auth/presentation/screens/auth_screen.da
 
 import 'features/auth/data/repositories_impl/auth_repository_impl.dart';
 import 'features/auth/domain/repositories/auth_repository.dart';
+import 'features/loan/data/repositories_impl/loan_repository_impl.dart';
+import 'features/loan/domain/repositories/loan_repository.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
           lazy: true,
           create: (_) => AuthRepositoryImpl(),
         ),
+        RepositoryProvider<LoanRepository>(create: (_) => LoanRepositoryImpl()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

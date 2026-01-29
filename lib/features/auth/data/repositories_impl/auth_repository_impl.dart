@@ -37,7 +37,6 @@ class AuthRepositoryImpl implements AuthRepository {
         print("Login Success! Token: $token");
         return token;
       } else if(response.statusCode == 401) {
-         final errorData = jsonDecode(response.body);
         throw "Username or Password is incorrect";  
       } else {
         final errorData = jsonDecode(response.body);

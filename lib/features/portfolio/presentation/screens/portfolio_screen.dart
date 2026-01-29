@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kopkar_testing/features/loan/domain/repositories/loan_repository.dart';
+import 'package:kopkar_testing/features/loan/presentation/screens/loan_detail_screen.dart';
 import 'package:kopkar_testing/features/portfolio/presentation/cubit/portfolio_state.dart';
 
 import '../cubit/portfolio_cubit.dart';
@@ -12,7 +14,7 @@ class PortfolioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PortfolioCubit()..loadPortfolioData(),
+      create: (context) => PortfolioCubit(  context.read<LoanRepository>(),)..loadPortfolioData(),
       child: const PortfolioView(),
     );
   }
@@ -40,7 +42,7 @@ class PortfolioView extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           } else if (state is PortfolioLoaded) {
             final data = state.data;
-            final double loanPercentage = (data.loanBalance / data.totalLoan).clamp(0.0, 1.0);
+            final double loanPercentage = (data.loan.loanBalance / data.loan.totalLoan).clamp(0.0, 1.0);
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -72,9 +74,9 @@ class PortfolioView extends StatelessWidget {
                           icon: Icons.receipt_long,
                           iconBackgroundImage: const AssetImage('assets/portfolio_page/simpanan_wajib_bg.png'),
                           onDetailTap: () {
-                             // Handle Navigation Here
+ 
                              print("Navigate to Simpanan Wajib Detail");
-                             // Example: Navigator.push(context, MaterialPageRoute(builder: (_) => DetailPage()));
+                        
                           },
                         ),
 
@@ -83,7 +85,7 @@ class PortfolioView extends StatelessWidget {
                           title: "Simpanan Sukarela",
                           amount: data.voluntarySavings,
                           icon: Icons.account_balance_wallet,
-                          backgroundColor: const Color(0xFF000080), // Dark Blue
+                          backgroundColor: const Color(0xFF000080), 
                           textColor: Colors.white,
                           iconBackgroundColor: const Color.fromARGB(0, 255, 255, 255),
                           onDetailTap: () {
@@ -100,11 +102,16 @@ class PortfolioView extends StatelessWidget {
                       children: [
 
                         LoanCard(
-                          amount: data.loanBalance,   // Menampilkan Rp 3.000.000
-                          date: data.loanDueDate,
-                          progress: loanPercentage,   // Mengirim 0.5 (50%)
+                          amount: data.loan.loanBalance,   
+                          date: data.loan.loanDueDate,
+                          progress: loanPercentage,   
                           onDetailTap: () {
                              print("Navigate to Pinjaman Detail");
+                             Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const LoanDetailScreen(),
+                              ),
+                            );
                           },
                         ),
                       ],

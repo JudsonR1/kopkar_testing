@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kopkar_testing/features/loan/domain/entities/loan_entity.dart';
 
-import '../../domain/entities/transaction_entity.dart';
 import '../../domain/entities/account_summary.dart';
+import '../../domain/entities/transaction_entity.dart';
 import 'home_state.dart';
 
 
@@ -37,6 +38,7 @@ class HomeCubit extends Cubit<HomeState> {
         mandatorySavings: 10000000,
         voluntarySavings: 2500000,
         transactions: transactions,
+        loan: LoanEntity(),
       );
 
       emit(HomeLoaded(homeData));

@@ -16,6 +16,18 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
 
+    final List<GlobalKey<NavigatorState>> _navigatorKeys =
+      List.generate(4, (_) => GlobalKey<NavigatorState>());
+
+        Widget _tabNavigator(Widget rootPage, int index) {
+    return Navigator(
+      key: _navigatorKeys[index],
+      onGenerateRoute: (_) => MaterialPageRoute(
+        builder: (_) => rootPage,
+      ),
+    );
+  }
+
   final List _pages = [
     HomeScreen(),
     PortfolioScreen(),
@@ -123,66 +135,14 @@ Widget _navItem({
       body: IndexedStack(
     index: _selectedIndex,
     children: [
-       const HomeScreen(),      
-       const PortfolioScreen(),
-       const ThirdPage(),
-       const FourthPage()
+      _tabNavigator(const HomeScreen(), 0),
+      _tabNavigator(const PortfolioScreen(), 1),
+      _tabNavigator(const ThirdPage(), 2),
+      _tabNavigator(const FourthPage(), 3),
     ],
   ),
       bottomNavigationBar: _customBottomBar(),
-  //     bottomNavigationBar: NavigationBarTheme(
-  //       data: NavigationBarThemeData(
-  //         indicatorColor: Colors.blue.shade50,
-  //         labelTextStyle: WidgetStateProperty.all(
-  //           const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-  //         ),
-  //         iconTheme: WidgetStateProperty.resolveWith((states) {
-  //           if (states.contains(WidgetState.selected)) {
-  //             return const IconThemeData(color: Color(0xFF000080));
-  //           }
-  //           return const IconThemeData(color: Colors.grey);
-  //         }),
-  //       ),
-  //       child: NavigationBar(
-  //         height: 70,
-  //         backgroundColor: Colors.white,
-  //         elevation: 0,
-  //         selectedIndex: _selectedIndex,
-  //         onDestinationSelected: (index) {
-  //           setState(() {
-  //             _selectedIndex = index;
-  //           });
-  //         },
-  //         destinations:  [
-  //           NavigationDestination(
-  //             icon:  SizedBox(
-  //   width: 24,
-  //   height: 24,
-  //   child: SvgPicture.asset('assets/icons/selected_home.svg'),
-  // ),           
-  //             selectedIcon: Icon(Icons.home),
-  //             label: 'Beranda',
-  //             ),
-  //             NavigationDestination(
-  //             icon: Icon(Icons.pie_chart_outline),
-  //             selectedIcon: Icon(Icons.pie_chart),
-  //             label: 'Portofolio',
-  //             ),
-  //             NavigationDestination(
-  //             icon: Icon(Icons.description_outlined),
-  //             selectedIcon: Icon(Icons.description),
-  //             label: 'Formulir',
-  //             ),
-  //             NavigationDestination(
-  //             icon: Icon(Icons.settings_outlined),    
-  //             selectedIcon: Icon(Icons.settings),
-  //             label: 'Pengaturan',
-  //             ),
-  //         ],
-        
-        
-  //       ),
-  //     ),
     );
   }
+  
 }

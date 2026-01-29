@@ -1,4 +1,5 @@
 import 'package:kopkar_testing/features/home/domain/entities/transaction_entity.dart';
+import 'package:kopkar_testing/features/loan/domain/entities/loan_entity.dart';
 
 class AccountSummary {
   final String userName;
@@ -6,9 +7,7 @@ class AccountSummary {
   final double totalBalance;
   final double mandatorySavings; // Simpanan Wajib
   final double voluntarySavings; // Simpanan Sukarela
-  final double loanBalance;      
-  final double totalLoan;        
-  final String loanDueDate;
+  final LoanEntity loan;
   final List<TransactionEntity> transactions;
 
   AccountSummary({
@@ -18,8 +17,6 @@ class AccountSummary {
     required this.mandatorySavings,
     required this.voluntarySavings,
     required this.transactions,
-    this.loanBalance=0,      
-    this.totalLoan=0,        
-    this.loanDueDate='',
+    required this.loan
   });
 }
