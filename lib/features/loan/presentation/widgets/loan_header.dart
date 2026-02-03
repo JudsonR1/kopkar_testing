@@ -161,7 +161,8 @@ class _GaugePainter extends CustomPainter {
       ..color = const Color(0xFFFFEBEE)
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
-      ..strokeCap = StrokeCap.round;
+      ..strokeCap = StrokeCap.round
+      ..isAntiAlias = true;
 
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius - strokeWidth / 2),
@@ -172,7 +173,8 @@ class _GaugePainter extends CustomPainter {
       ..color = const Color(0xFFD32F2F)
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
-      ..strokeCap = StrokeCap.round;
+      ..strokeCap = StrokeCap.round
+      ..isAntiAlias = true;
 
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius - strokeWidth / 2),

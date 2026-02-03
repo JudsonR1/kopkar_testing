@@ -30,7 +30,20 @@ class LoanPaymentList extends StatelessWidget {
             const SizedBox(height: 10),
             
             // The List
-            ...loans.paymentHistory.map((entity) => _buildHistoryItem(entity)),
+            // ...loans.paymentHistory.map((entity) => _buildHistoryItem(entity)),
+                for (int i = 0; i < loans.paymentHistory.length; i++) ...[
+          _buildHistoryItem(loans.paymentHistory[i]),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+              child: Divider(
+                height: 1,            
+                thickness: 1,       
+                color: const Color.fromARGB(255, 169, 168, 168), 
+                indent: 0,           
+                endIndent: 0,        
+              ),
+            ),
+        ],
           ],
         ),
       ),

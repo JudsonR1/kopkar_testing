@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kopkar_testing/features/loan/domain/repositories/loan_repository.dart';
 import 'package:kopkar_testing/features/loan/presentation/screens/loan_detail_screen.dart';
 import 'package:kopkar_testing/features/portfolio/presentation/cubit/portfolio_state.dart';
+import 'package:kopkar_testing/features/portfolio/presentation/screens/savings/mandatory_savings_screen.dart';
+import 'package:kopkar_testing/features/portfolio/presentation/screens/savings/voluntary_savings_screen.dart';
 
 import '../cubit/portfolio_cubit.dart';
 import '../widgets/loan_card.dart';
@@ -27,105 +29,128 @@ class PortfolioView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text(
-          "Portofolio",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: false,
-      ),
-      body: BlocBuilder<PortfolioCubit, PortfolioState>(
-        builder: (context, state) {
-          if (state is PortfolioLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is PortfolioLoaded) {
-            final data = state.data;
-            final double loanPercentage = (data.loan.loanBalance / data.loan.totalLoan).clamp(0.0, 1.0);
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  // Total Balance Bar
-                  Container(
-                    color: Colors.grey.shade50,
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Total Saldo", style: TextStyle(color: Colors.blueGrey.shade700, fontSize: 16)),
-                        Text(
-                          "Rp ${_formatCurrency(data.totalBalance)}",
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                      ],
-                    ),
-                  ),
-                  //3. loan card
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      children: [
-                        // 1. Simpanan Wajib (White Card)
-                        PortfolioCard(
-                          title: "Simpanan Wajib",
-                          amount: data.mandatorySavings,
-                          icon: Icons.receipt_long,
-                          iconBackgroundImage: const AssetImage('assets/portfolio_page/simpanan_wajib_bg.png'),
-                          onDetailTap: () {
- 
-                             print("Navigate to Simpanan Wajib Detail");
-                        
-                          },
-                        ),
-
-                        // 2. Simpanan Sukarela (Blue Card)
-                        PortfolioCard(
-                          title: "Simpanan Sukarela",
-                          amount: data.voluntarySavings,
-                          icon: Icons.account_balance_wallet,
-                          backgroundColor: const Color(0xFF000080), 
-                          textColor: Colors.white,
-                          iconBackgroundColor: const Color.fromARGB(0, 255, 255, 255),
-                          onDetailTap: () {
-                             print("Navigate to Simpanan Sukarela Detail");
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  //3. Sisa Pinjaman (Red Card)
-                           Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      children: [
-
-                        LoanCard(
-                          amount: data.loan.loanBalance,   
-                          date: data.loan.loanDueDate,
-                          progress: loanPercentage,   
-                          onDetailTap: () {
-                             print("Navigate to Pinjaman Detail");
-                             Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => const LoanDetailScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                ],
+      // appBar: AppBar(
+      //   title: const Text(
+      //     "Portofolio",
+      //     style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+      //   ),
+      //   backgroundColor: Colors.white,
+      //   elevation: 0,
+      //   centerTitle: false,
+      // ),
+      body:  Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 40, 0, 0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Portofolio",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-            );
-          } else if (state is PortfolioError) {
-            return Center(child: Text(state.message));
-          }
-          return const SizedBox();
-        },
+            ),
+          ),
+          BlocBuilder<PortfolioCubit, PortfolioState>(
+            builder: (context, state) {
+              if (state is PortfolioLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is PortfolioLoaded) {
+                final data = state.data;
+                final double loanPercentage = (data.loan.loanBalance / data.loan.totalLoan).clamp(0.0, 1.0);
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // Total Balance Bar
+                      Container(
+                        color: Colors.grey.shade50,
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Total Saldo", style: TextStyle(color: Colors.blueGrey.shade700, fontSize: 16)),
+                            Text(
+                              "Rp ${_formatCurrency(data.totalBalance)}",
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ),
+                      //3. loan card
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          children: [
+                            // 1. Simpanan Wajib (White Card)
+                            PortfolioCard(
+                              title: "Simpanan Wajib",
+                              amount: data.mandatorySavings,
+                              icon: Icons.receipt_long,
+                              iconBackgroundImage: const AssetImage('assets/portfolio_page/simpanan_wajib_bg.png'),
+                              onDetailTap: () {
+                                 print("Navigate to Simpanan Wajib Detail");
+                                 Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => const MandatorySavingsScreen(),
+                                  ),
+                                );
+                            
+                              },
+                            ),
+          
+                            // 2. Simpanan Sukarela (Blue Card)
+                            PortfolioCard(
+                              title: "Simpanan Sukarela",
+                              amount: data.voluntarySavings,
+                              icon: Icons.account_balance_wallet,
+                              backgroundColor: const Color(0xFF000080), 
+                              textColor: Colors.white,
+                              iconBackgroundColor: const Color.fromARGB(0, 255, 255, 255),
+                              onDetailTap: () {
+                                 print("Navigate to Simpanan Sukarela Detail");
+                                 Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => const VoluntarySavingsScreen(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      //3. Sisa Pinjaman (Red Card)
+                               Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          children: [
+          
+                            LoanCard(
+                              amount: data.loan.loanBalance,   
+                              date: data.loan.loanDueDate,
+                              progress: loanPercentage,   
+                              onDetailTap: () {
+                                 print("Navigate to Pinjaman Detail");
+                                 Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => const LoanDetailScreen(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                    ],
+                  ),
+                );
+              } else if (state is PortfolioError) {
+                return Center(child: Text(state.message));
+              }
+              return const SizedBox();
+            },
+          ),
+        ],
       ),
     );
   }

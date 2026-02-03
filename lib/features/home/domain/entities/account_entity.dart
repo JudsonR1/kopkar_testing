@@ -1,7 +1,7 @@
 import 'package:kopkar_testing/features/home/domain/entities/transaction_entity.dart';
 import 'package:kopkar_testing/features/loan/domain/entities/loan_entity.dart';
 
-class AccountSummary {
+class AccountEntity {
   final String userName;
   final String memberId;
   final double totalBalance;
@@ -10,7 +10,7 @@ class AccountSummary {
   final LoanEntity loan;
   final List<TransactionEntity> transactions;
 
-  AccountSummary({
+  AccountEntity({
     required this.userName,
     required this.memberId,
     required this.totalBalance,

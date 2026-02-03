@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kopkar_testing/features/loan/domain/entities/loan_entity.dart';
 
-import '../../domain/entities/account_summary.dart';
+import '../../domain/entities/account_entity.dart';
 import '../../domain/entities/transaction_entity.dart';
 import 'home_state.dart';
 
@@ -31,7 +31,7 @@ class HomeCubit extends Cubit<HomeState> {
         TransactionEntity("TESTING","Testing", "02 Jun 2025, 09.15", 500000, false),
       ];
 
-      final homeData = AccountSummary(
+      final homeData = AccountEntity(
         userName: "Stella Budiman",
         memberId: "50739",
         totalBalance: 12500000,

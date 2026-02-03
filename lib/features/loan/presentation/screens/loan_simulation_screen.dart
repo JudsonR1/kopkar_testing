@@ -208,27 +208,35 @@ class _LoanSimulationScreenState extends State<LoanSimulationScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.grey[700],
-              fontSize: 14,
-            ),
-          ),
+          Padding(
+  padding: const EdgeInsets.only(left: 6),
+  child: Text(
+    title,
+    style: TextStyle(
+      color: Colors.grey[700],
+      fontSize: 14,
+    ),
+  ),
+),
           const SizedBox(height: 5),
-          Text(
-            valueDisplay,
-            style: const TextStyle(
-              color: Colors.black87,
-              fontSize: 28,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+        Padding(
+  padding: const EdgeInsets.only(left:6),
+  child: Text(
+    valueDisplay,
+    style: const TextStyle(
+      color: Colors.black87,
+      fontSize: 28,
+      fontWeight: FontWeight.w400,
+    ),
+  ),
+),
           const SizedBox(height: 0),
           SizedBox(
             width: double.infinity,
-            child: child,
+            child:Transform.translate(
+    offset: const Offset(-18, 0), // move slider left
+    child: child,
+  ),
           ),
         ],
       ),

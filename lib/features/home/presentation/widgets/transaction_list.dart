@@ -53,7 +53,7 @@ Widget _buildMonthHeader(TransactionGroup group) {
           BoxShadow(
           color: const Color.fromARGB(26, 0, 0, 0),
           offset: const Offset(0, 4), 
-         blurRadius: 8,
+         blurRadius: 4,
          spreadRadius: 0,
       ),
     ],
