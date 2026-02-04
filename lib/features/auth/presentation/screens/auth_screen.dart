@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kopkar_testing/features/auth/domain/repositories/auth_repository.dart';
 import 'package:kopkar_testing/features/auth/presentation/cubit/auth_state.dart';
 import 'package:kopkar_testing/navigation.dart';
 
@@ -14,13 +13,7 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-       lazy: true,
-      create: (context) =>AuthCubit(
-        context.read<AuthRepository>(), 
-      ),
-      child: const AuthView(),
-    );
+    return const AuthView();
   }
 }
 

@@ -66,7 +66,8 @@ class _VoluntaryView extends StatelessWidget {
                     children: [
                       SavingsHeader(
                         balance: state.data.balance,
-                        icon: Icons.receipt_long,
+                        icon: Icons.account_balance_wallet,
+                        iconBGColor: const Color(0xFF0D47A1),
                       ),
                        Container(
                         padding: const EdgeInsets.all(0),

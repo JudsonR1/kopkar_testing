@@ -67,6 +67,7 @@ class _MandatoryView extends StatelessWidget {
                       SavingsHeader(
                         balance: state.data.balance,
                         icon: Icons.receipt_long,
+                        iconBGImage:  const AssetImage('assets/portfolio_page/simpanan_wajib_bg.png'),
                       ),
                        Container(
                         padding: const EdgeInsets.all(0),

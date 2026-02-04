@@ -1,7 +1,7 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kopkar_testing/features/auth/presentation/cubit/auth_state.dart';
 import 'package:kopkar_testing/features/auth/domain/repositories/auth_repository.dart';
+import 'package:kopkar_testing/features/auth/presentation/cubit/auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository _authRepository;
@@ -43,6 +43,16 @@ class AuthCubit extends Cubit<AuthState> {
       }
     } catch (e) {
       emit(AuthFailure(e.toString()));
+    }
+  }
+
+  Future<void> logout() async {
+    emit(AuthLoading());
+    try {
+      await _authRepository.logout();
+      emit(AuthInitial()); 
+    } catch (e) {
+      emit(const AuthFailure("Failed to logout"));
     }
   }
 }

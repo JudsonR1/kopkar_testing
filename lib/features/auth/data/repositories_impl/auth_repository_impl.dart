@@ -46,4 +46,8 @@ class AuthRepositoryImpl implements AuthRepository {
       rethrow;
     }
   }
+  Future<void> logout() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    print("User logged out successfully");
+  }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kopkar_testing/features/forms/presentation/screens/forms_screen.dart';
 import 'package:kopkar_testing/features/portfolio/presentation/screens/portfolio_screen.dart';
-import 'package:kopkar_testing/test_page_3.dart';
-import 'package:kopkar_testing/test_page_4.dart';
+import 'package:kopkar_testing/features/settings/presentation/screens/settings_screen.dart';
 
 import 'features/home/presentation/screens/home_screen.dart';
 
@@ -28,12 +28,6 @@ class _NavigationState extends State<Navigation> {
     );
   }
 
-  final List _pages = [
-    HomeScreen(),
-    PortfolioScreen(),
-    ThirdPage(),
-    FourthPage(),
-  ];
 Widget _customBottomBar() {
   return Container(
     height: 80,
@@ -137,8 +131,8 @@ Widget _navItem({
     children: [
       _tabNavigator(const HomeScreen(), 0),
       _tabNavigator(const PortfolioScreen(), 1),
-      _tabNavigator(const ThirdPage(), 2),
-      _tabNavigator(const FourthPage(), 3),
+      _tabNavigator(const FormsScreen(), 2),
+      _tabNavigator(const SettingsScreen(), 3),
     ],
   ),
       bottomNavigationBar: _customBottomBar(),

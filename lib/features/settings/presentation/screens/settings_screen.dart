@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kopkar_testing/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:kopkar_testing/features/auth/presentation/cubit/auth_state.dart';
 import 'package:kopkar_testing/features/auth/presentation/screens/auth_screen.dart';
+import 'package:kopkar_testing/features/settings/presentation/screens/bank_account_screen.dart';
+import 'package:kopkar_testing/features/settings/presentation/screens/change_password_screen.dart';
 import 'package:kopkar_testing/features/settings/presentation/widgets/settings_menu.dart';
 
 import '../widgets/profile_header.dart';
@@ -32,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-          ProfileHeader(name: "test", id: "105535"),
+          ProfileHeader(name: "Stella Budiman", id: "50739"),
               SizedBox(height: 10),
                 
           SettingsMenu(
@@ -42,7 +44,12 @@ class SettingsScreen extends StatelessWidget {
                   color: Colors.blueGrey.shade700,
                   size: 24,
                 ), 
-            onTap: (){}),
+            onTap: (){
+              Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const BankAccountScreen()),
+    );
+            }),
           SettingsMenu(
             title: "Ganti Password", 
             icon:Icon(
@@ -50,7 +57,12 @@ class SettingsScreen extends StatelessWidget {
                   color: Colors.blueGrey.shade700,
                   size: 24,
                 ), 
-            onTap: (){}),
+            onTap: (){
+              Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ChangePasswordScreen()),
+    );
+            }),
           SizedBox(height: 10),
              Divider(
                 height: 1,            
@@ -69,7 +81,7 @@ class SettingsScreen extends StatelessWidget {
                     width: 20,
                   ),
                 ),
-                onTap: () => {},
+                onTap: () => _handleLogout(context),
                 isDestructive: true,
               ),
             ],
@@ -79,5 +91,11 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-
+void _handleLogout(BuildContext context) {
+ context.read<AuthCubit>().logout();
+  Navigator.of(context, rootNavigator: true).pushAndRemoveUntil( 
+    MaterialPageRoute(builder: (context) => const AuthScreen()),
+    (route) => false,
+  );
+}
 }
