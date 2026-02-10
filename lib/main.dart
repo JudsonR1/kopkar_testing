@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:kopkar_testing/features/auth/domain/usecases/login_usecase.dart';
+import 'package:kopkar_testing/features/auth/domain/usecases/logout_usecase.dart';
+import 'package:kopkar_testing/features/auth/domain/usecases/register_usecase.dart';
 import 'package:kopkar_testing/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:kopkar_testing/features/auth/presentation/screens/auth_screen.dart';
 import 'package:kopkar_testing/features/portfolio/data/repositories_impl/savings_repository_impl.dart';
@@ -34,8 +37,12 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
          providers: [
           BlocProvider<AuthCubit>(
-            create: (context) =>
-                AuthCubit(context.read<AuthRepository>()),
+            create: (context) {
+    final authRepo = context.read<AuthRepository>();
+    return AuthCubit(
+      LoginUseCase(authRepo), LogoutUseCase(authRepo), RegisterUseCase(authRepo),
+    );
+            },
           ),
         ],
         child: MaterialApp(

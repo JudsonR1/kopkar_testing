@@ -55,9 +55,11 @@ class _AuthViewState extends State<AuthView> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.message), backgroundColor: Colors.green),
           );
+          if (state.message.toLowerCase().contains("login")){
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => Navigation()),
             );
+          }
         } else if (state is AuthFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.error), backgroundColor: Colors.red),

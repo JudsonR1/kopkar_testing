@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:kopkar_testing/core/utils/device_utils.dart';
+import 'package:kopkar_testing/features/auth/presentation/widgets/register_form_widget.dart';
 
 // Import the domain contract
 import '../../domain/repositories/auth_repository.dart';
@@ -49,5 +50,14 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> logout() async {
     await Future.delayed(const Duration(milliseconds: 500));
     print("User logged out successfully");
+  }
+  Future<void> register(
+    String memberId,
+    String email,
+    String phone,
+    String password,
+  ) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    print("User registered successfully");
   }
 }
