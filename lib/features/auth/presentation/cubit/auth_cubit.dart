@@ -18,11 +18,11 @@ class AuthCubit extends Cubit<AuthState> {
         emit(const AuthFailure("Please fill in all fields."));
         return;
       }
- await _loginUseCase.call(identifier, password);
+    await _loginUseCase.call(identifier, password);
       emit(const AuthSuccess("Login Successful!"));
-
     } catch (e) {
-      emit(AuthFailure(e.toString()));
+      final message = e.toString().replaceFirst('Exception: ', '');
+  emit(AuthFailure(message));
     }
   }
 

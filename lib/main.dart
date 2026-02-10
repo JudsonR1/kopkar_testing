@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:kopkar_testing/features/auth/data/datasource/auth_datasource.dart';
 import 'package:kopkar_testing/features/auth/domain/usecases/login_usecase.dart';
 import 'package:kopkar_testing/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:kopkar_testing/features/auth/domain/usecases/register_usecase.dart';
@@ -22,14 +24,27 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  
   @override
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context) {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: dotenv.env['API_URL'] ?? '',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      ),
+    );
+
      return  MultiRepositoryProvider(
       providers: [
+        RepositoryProvider<AuthDataSource>(
+  create: (_) => AuthDataSource(dio),
+),
         RepositoryProvider<AuthRepository>(
           lazy: true,
-          create: (_) => AuthRepositoryImpl(),
+          create: (context) => AuthRepositoryImpl(authDataSource: context.read<AuthDataSource>()),
         ),
         RepositoryProvider<LoanRepository>(lazy: true,create: (_) => LoanRepositoryImpl()),
         RepositoryProvider<SavingsRepository>(lazy: true,create: (_) => SavingsRepositoryImpl()),
