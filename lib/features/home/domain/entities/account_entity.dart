@@ -17,6 +17,20 @@ class AccountEntity {
     required this.mandatorySavings,
     required this.voluntarySavings,
     required this.transactions,
-    required this.loan
-  });
+    LoanEntity? loan
+  }) : loan = loan ?? LoanEntity();
+
+  AccountEntity copyWith({
+  LoanEntity? loan,
+}) {
+  return AccountEntity(
+    userName: userName,
+    memberId: memberId,
+    totalBalance: totalBalance,
+    mandatorySavings: mandatorySavings,
+    voluntarySavings: voluntarySavings,
+    transactions: transactions,
+    loan: loan ?? this.loan,
+  );
+}
 }

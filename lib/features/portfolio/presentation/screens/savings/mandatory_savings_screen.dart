@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kopkar_testing/features/home/presentation/widgets/transaction_list.dart';
 import 'package:kopkar_testing/features/portfolio/domain/repositories/savings_repository.dart';
+import 'package:kopkar_testing/features/portfolio/domain/usecase/get_savings_details_usecase.dart';
 import 'package:kopkar_testing/features/portfolio/presentation/cubit/savings_cubit.dart';
 import 'package:kopkar_testing/features/portfolio/presentation/cubit/savings_state.dart';
 import 'package:kopkar_testing/features/portfolio/presentation/widgets/savings/savings_header.dart';
@@ -15,7 +16,7 @@ class MandatorySavingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SavingsCubit(
-        context.read<SavingsRepository>(), 
+       GetSavingsDetailsUsecase(context.read<SavingsRepository>()),
       )..loadSavingsDetails('wajib'),
       child: const _MandatoryView(),
     );

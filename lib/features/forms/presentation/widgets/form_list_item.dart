@@ -28,7 +28,6 @@ class FormListItem extends StatelessWidget {
 }
 
   Widget _iconForFile(String ext) {
-    print("File extension is: $ext");
     switch (ext) {
       case 'pdf':
         // return SvgPicture.asset('assets/icons/selected_home.svg',width: 8);

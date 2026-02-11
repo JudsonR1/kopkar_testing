@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kopkar_testing/features/loan/domain/repositories/loan_repository.dart';
 import 'package:kopkar_testing/features/loan/presentation/screens/loan_detail_screen.dart';
+import 'package:kopkar_testing/features/portfolio/domain/repositories/portoflio_repository.dart';
+import 'package:kopkar_testing/features/portfolio/domain/usecase/get_portfolio_data_usecase.dart';
 import 'package:kopkar_testing/features/portfolio/presentation/cubit/portfolio_state.dart';
 import 'package:kopkar_testing/features/portfolio/presentation/screens/savings/mandatory_savings_screen.dart';
 import 'package:kopkar_testing/features/portfolio/presentation/screens/savings/voluntary_savings_screen.dart';
@@ -16,7 +18,12 @@ class PortfolioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PortfolioCubit(  context.read<LoanRepository>(),)..loadPortfolioData(),
+      create: (context) => PortfolioCubit(
+        GetPortfolioDataUseCase(
+          context.read<PortfolioRepository>(), 
+          context.read<LoanRepository>()
+      ),
+      )..loadPortfolioData(),
       child: const PortfolioView(),
     );
   }

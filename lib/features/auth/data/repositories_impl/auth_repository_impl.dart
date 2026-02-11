@@ -15,7 +15,6 @@ class AuthRepositoryImpl implements AuthRepository {
     try{  
       final deviceIdToken = Platform.operatingSystem;
     final response = await authDataSource.login(username, password,deviceIdToken);
-    print("this is device id token"+ deviceIdToken);
     return response.token;
     }
     on DioException catch (e){

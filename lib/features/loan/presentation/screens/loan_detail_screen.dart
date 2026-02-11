@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kopkar_testing/features/loan/domain/usecases/get_loan_details_usecase.dart';
 import 'package:kopkar_testing/features/loan/presentation/screens/loan_simulation_screen.dart';
 
 import '../../domain/repositories/loan_repository.dart';
@@ -15,7 +16,7 @@ class LoanDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoanDetailCubit(
-        context.read<LoanRepository>(), 
+        GetLoanDetailsUsecase(context.read<LoanRepository>()),
       )..loadLoanDetails(),
       child: const LoanDetailView(),
     );

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kopkar_testing/features/loan/domain/repositories/loan_repository.dart';
+import 'package:kopkar_testing/features/portfolio/domain/repositories/portoflio_repository.dart';
+import 'package:kopkar_testing/features/portfolio/domain/usecase/get_portfolio_data_usecase.dart';
 
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
@@ -13,7 +16,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit()..loadHomeData(),
+      create: (context) => HomeCubit(GetPortfolioDataUseCase(
+          context.read<PortfolioRepository>(), 
+          context.read<LoanRepository>()
+      ),)..loadHomeData(),
       child: const HomeView(),
     );
   }
