@@ -6,7 +6,7 @@ import '../../domain/repositories/auth_repository.dart';
 import '../datasource/auth_datasource.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthDataSource authDataSource;
+  final AuthDatasource authDataSource;
 
   AuthRepositoryImpl({required this.authDataSource});
 

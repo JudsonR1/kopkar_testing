@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kopkar_testing/dependency_injection.dart';
 import 'package:kopkar_testing/features/forms/presentation/cubit/form_list_cubit.dart';
 import 'package:kopkar_testing/features/forms/presentation/cubit/form_list_state.dart';
 
@@ -10,8 +11,10 @@ class FormsScreen extends StatelessWidget {
 
   @override
    Widget build(BuildContext context) {
+   final sl = DependencyInjection.getInstance.getIt;
+
     return BlocProvider(
-      create: (context) => FormListCubit()..loadForms(),
+      create: (_) => sl<FormListCubit>()..loadForms(),
       child: const FormsView(),
     );
   }

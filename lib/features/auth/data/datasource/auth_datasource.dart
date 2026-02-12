@@ -1,11 +1,17 @@
 import 'package:dio/dio.dart';
 import '../model/auth_login_response_model.dart';
 
-class AuthDataSource {
+
+abstract class AuthDatasource {
+  Future<AuthLoginResponseModel> login(String username, String password,  String deviceIdToken);
+}
+
+class AuthDataSourceImpl implements AuthDatasource {
   final Dio dio;
 
-  AuthDataSource(this.dio);
+  AuthDataSourceImpl(this.dio);
 
+  @override
   Future<AuthLoginResponseModel> login(
     String username,
     String password,

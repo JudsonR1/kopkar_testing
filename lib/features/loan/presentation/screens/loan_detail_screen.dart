@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kopkar_testing/dependency_injection.dart';
 import 'package:kopkar_testing/features/loan/domain/usecases/get_loan_details_usecase.dart';
 import 'package:kopkar_testing/features/loan/presentation/screens/loan_simulation_screen.dart';
 
@@ -14,10 +15,10 @@ class LoanDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sl = DependencyInjection.getInstance.getIt;
+
     return BlocProvider(
-      create: (context) => LoanDetailCubit(
-        GetLoanDetailsUsecase(context.read<LoanRepository>()),
-      )..loadLoanDetails(),
+      create: (_) => sl<LoanDetailCubit>()..loadLoanDetails(),
       child: const LoanDetailView(),
     );
   }

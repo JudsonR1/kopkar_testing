@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kopkar_testing/dependency_injection.dart';
 import 'package:kopkar_testing/features/loan/domain/repositories/loan_repository.dart';
 import 'package:kopkar_testing/features/loan/presentation/screens/loan_detail_screen.dart';
 import 'package:kopkar_testing/features/portfolio/domain/repositories/portoflio_repository.dart';
@@ -17,13 +18,10 @@ class PortfolioScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sl = DependencyInjection.getInstance.getIt;
+
     return BlocProvider(
-      create: (context) => PortfolioCubit(
-        GetPortfolioDataUseCase(
-          context.read<PortfolioRepository>(), 
-          context.read<LoanRepository>()
-      ),
-      )..loadPortfolioData(),
+      create: (_) => sl<PortfolioCubit>()..loadPortfolioData(),
       child: const PortfolioView(),
     );
   }

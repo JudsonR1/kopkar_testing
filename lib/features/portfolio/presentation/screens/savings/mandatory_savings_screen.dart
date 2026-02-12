@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kopkar_testing/dependency_injection.dart';
 import 'package:kopkar_testing/features/home/presentation/widgets/transaction_list.dart';
 import 'package:kopkar_testing/features/portfolio/domain/repositories/savings_repository.dart';
 import 'package:kopkar_testing/features/portfolio/domain/usecase/get_savings_details_usecase.dart';
@@ -14,10 +15,10 @@ class MandatorySavingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      final sl = DependencyInjection.getInstance.getIt;
+
     return BlocProvider(
-      create: (context) => SavingsCubit(
-       GetSavingsDetailsUsecase(context.read<SavingsRepository>()),
-      )..loadSavingsDetails('wajib'),
+      create: (_) => sl<SavingsCubit>()..loadSavingsDetails('wajib'),
       child: const _MandatoryView(),
     );
   }

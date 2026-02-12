@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kopkar_testing/dependency_injection.dart';
 import 'package:kopkar_testing/features/home/presentation/widgets/transaction_list.dart';
-import 'package:kopkar_testing/features/portfolio/domain/repositories/savings_repository.dart';
-import 'package:kopkar_testing/features/portfolio/domain/usecase/get_savings_details_usecase.dart';
 import 'package:kopkar_testing/features/portfolio/presentation/cubit/savings_cubit.dart';
 import 'package:kopkar_testing/features/portfolio/presentation/cubit/savings_state.dart';
 import 'package:kopkar_testing/features/portfolio/presentation/widgets/savings/savings_header.dart';
@@ -14,12 +13,12 @@ class VoluntarySavingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SavingsCubit(
-       GetSavingsDetailsUsecase(context.read<SavingsRepository>()),
-      )..loadSavingsDetails('sukarela'),
-      child: const _VoluntaryView(),
-    );
+     final sl = DependencyInjection.getInstance.getIt;
+
+  return BlocProvider(
+    create: (_) => sl<SavingsCubit>()..loadSavingsDetails('sukarela'),
+    child: const _VoluntaryView(),
+  );
   }
 }
 
